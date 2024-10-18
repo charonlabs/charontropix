@@ -55,7 +55,12 @@ def calculate_metrics(logits: torch.Tensor, attention_scores: torch.Tensor) -> D
     entropy, varentropy = calculate_varentropy_logsoftmax(logits)
     attention_probs = F.softmax(attention_scores, dim=-1)
     attn_entropy = -torch.sum(attention_probs * torch.log2(torch.clamp(attention_probs, 1e-10, 1.0)), dim=-1)
-    attn_varentropy = torch.var(attn_entropy, dim=-1)
+    
+    # Calculate variance only if there's more than one element
+    if attn_entropy.shape[-1] > 1:
+        attn_varentropy = torch.var(attn_entropy, dim=-1)
+    else:
+        attn_varentropy = torch.zeros_like(attn_entropy)
     
     # Add a small epsilon to avoid NaN when all values are the same
     attn_varentropy = torch.where(torch.isnan(attn_varentropy), torch.zeros_like(attn_varentropy), attn_varentropy)

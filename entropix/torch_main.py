@@ -9,15 +9,21 @@ import tyro
 from pathlib import Path
 from functools import partial
 
-from entropix.config import LLAMA_1B_PARAMS
+from entropix.config import LLAMA_1B_PARAMS, LLAMA_3B_PARAMS
 from entropix.tokenizer import Tokenizer
 from entropix.torch_kvcache import KVCache
 from entropix.torch_model import xfmr
 from entropix.torch_weights import XfmrWeights, LayerWeights, load_weights
 from entropix.torch_sampler import sample
-from entropix.prompts import prompt, bp1
+from entropix.prompts import bp1, create_prompts_from_csv
+from entropix.prompts import prompt1 as prompt
+import random
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+csv_path = Path('entropix/data/prompts.csv')
+# prompts = create_prompts_from_csv(csv_path)
+# prompt = random.choice(prompts)
+# prompt = prompts[61]
 
 
 # Device selection, tree is like first apple silicion, then cuda, fallback is cpu.
@@ -91,10 +97,15 @@ def build_attn_mask(seqlen: int, start_pos: int) -> torch.Tensor:
 
 def main():
   with torch.inference_mode():
-    model_params = LLAMA_1B_PARAMS
-    xfmr_weights = load_weights()
 
-    tokenizer = Tokenizer('entropix/tokenizer.model')
+
+    # model_params = LLAMA_1B_PARAMS #1B
+    # xfmr_weights = load_weights(Path('/raid/weights/llama3_2/1B-Instruct'), n_layers=model_params.n_layers) #1B
+ 
+    model_params = LLAMA_3B_PARAMS #3B
+    xfmr_weights = load_weights(Path('/raid/weights/llama3_2/3B-Instruct'), n_layers=model_params.n_layers) #3B
+
+    tokenizer = Tokenizer('/raid/weights/llama3_2/tokenizer.model')
     raw_tokens1 = tokenizer.encode(prompt,  bos=False, eos=False, allowed_special='all')
     #this is not used in this script, but can be used to generate base_raw_tokens1
     base_raw_tokens1 = tokenizer.encode(bp1, bos=True, eos=False, allowed_special='all')

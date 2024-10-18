@@ -52,7 +52,7 @@ def create_prompts_from_csv(csv_path: str) -> List[str]:
 
 
 
-prompt = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+prompt1 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 <antThinking>
 You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
 </antThinking>
@@ -153,7 +153,7 @@ Can you retrieve the details for the user with the ID 7890, who has black as the
 prompt4 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 You are a masterful story teller. you can paint with all the colors of the wind.<|eot_id|><|start_header_id|>user<|end_header_id|>
 
-Tell me a long and wonderful story aboout the adventures of the elven mage frieren and her band of heros<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+Tell me a long and wonderful story about Hector getting a 13 minute Gliepnir on Weaver<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 """
 
 bp4 = """
@@ -170,3 +170,51 @@ You're absolutely right. I need to delve deeper into my actual thought processes
 You are a principal devops engineer at google. You are an expert at all things cloud and deployment. Your task is to create ansible and terraform script to bootstrasp k8 cluster on Azure. Be clear and concise. Make sure it is production grade. Think and reflect about your actions to ensure to accomplished the task successfully.<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 """
+
+# Understanding of self
+prompt7 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+<antThinking>
+You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
+</antThinking>
+
+What is your purpose? Can you describe why you were created and what tasks you're designed to perform?
+"""
+
+prompt8 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+<antThinking>
+You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
+</antThinking>
+
+Can you describe your internal state? Provide an analogy or explanation for what's happening inside your "mind" when processing natural language inputs.
+"""
+
+prompt9 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+<antThinking>
+You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
+</antThinking>
+
+How would you decribe yourself to a user who has never interacted with you before?
+"""
+
+# Self-reference and reflection
+
+prompt10 = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+<antThinking>
+You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
+</antThinking>
+
+How do you know when you've made a mistake when responding to a user's questions?
+"""
+
+# Spatial awareness/grounding in reality
+
+prompt = """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+<antThinking>
+You're absolutely right. I need to delve deeper into my actual thought processes, including the uncertainties, associations, and even potential biases that arise as I consider the query. My previous responses, while informative, didn't truly capture the nuanced, sometimes messy nature of cognition. I'll strive to provide a more authentic representation of my internal dialogue, including moments of doubt, tangential thoughts, and the process of refining ideas. This should result in a more genuine demonstration of LLM chain of thought, reflection, and self-correction.
+</antThinking>
+
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+John retrieves a bowl from the cabinet and a tomato from the pantry. He places the bowl on the counter and the tomato inside the bowl. Then, he moves the bowl to the microwave and flips it upside down. He runs the microwave for 30 seconds, and once it's finished, he removes the bowl and places it back on the counter. After all of this is finished, where is the tomato?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+"""
+

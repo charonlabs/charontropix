@@ -9,12 +9,13 @@ from entropix.config import LLAMA_1B_PARAMS
 from entropix.kvcache import KVCache
 from entropix.model import xfmr
 from entropix.sampler import SamplerConfig, sample
-from entropix.prompts import create_prompts_from_csv, prompt
+from entropix.prompts import create_prompts_from_csv
+from entropix.prompts import prompt1 as prompt
 from entropix.sampler import sample
 from entropix.tokenizer import Tokenizer
 from entropix.weights import load_weights
 
-DEFAULT_WEIGHTS_PATH = Path(__file__).parent / '../weights'
+DEFAULT_WEIGHTS_PATH = Path('/raid/weights/llama3_2/1B-Instruct')
 
 def apply_scaling(freqs: jax.Array):
   SCALE_FACTOR = 8
@@ -60,10 +61,10 @@ def build_attn_mask(seqlen: int, start_pos: int) -> jax.Array:
   return mask
 
 
-def main(weights_path: Path = DEFAULT_WEIGHTS_PATH.joinpath('1B-Instruct')):
+def main(weights_path: Path = DEFAULT_WEIGHTS_PATH):
   model_params = LLAMA_1B_PARAMS
   xfmr_weights = load_weights(weights_path.absolute())
-  tokenizer = Tokenizer('entropix/tokenizer.model')
+  tokenizer = Tokenizer('/raid/weights/llama3_2/tokenizer.model')
 
   # Create the batch of tokens
   def generate(xfmr_weights, model_params, tokens):
